@@ -185,7 +185,7 @@ pickleshare @ file:///tmp/build/80754af9/pickleshare_1606932040724/work
 Pillow==9.4.0
 pkginfo @ file:///C:/b/abs_d51wye6ned/croot/pkginfo_1666725041585/work
 platformdirs @ file:///C:/b/abs_73cc5cz_1u/croots/recipe/platformdirs_1662711386458/work
-plotly @ file:///C:/ci/plotly_1658160673416/work
+plotly==5.3.1
 pluggy @ file:///C:/ci/pluggy_1648042746254/work
 ply==3.11
 pooch @ file:///tmp/build/80754af9/pooch_1623324770023/work
