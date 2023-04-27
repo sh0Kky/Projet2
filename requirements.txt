@@ -16,4 +16,4 @@ Pillow==9.4.0
 plotly==5.9.0
 streamlit==1.21.0
 pip==23.1.2
-
+python==3.9.5
