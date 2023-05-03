@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.neighbors import NearestNeighbors
 
 # charger les données
-df_main = pd.read_csv(r"C:\Users\rapha\OneDrive\Bureau\WCS\Projet 2\Data\Datadf_main.csv", sep = ";", low_memory=False)
+df_main = pd.read_csv(r"https://github.com/sh0Kky/Projet2/blob/67e3a0e04577999af8ef4d2743cfe1a74e561f82/Datadf_main.csv", sep = ";", low_memory=False)
 
 # faire une copie de df_main
 df_copy = df_main.copy()
