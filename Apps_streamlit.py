@@ -27,13 +27,22 @@ background-size: cover;
 
 </style>
 """
-
+st.markdown(
+    """
+    <style>
+    body {
+        color: black;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 st.markdown(page_bg_img, unsafe_allow_html=True)
 selected_genres = []
 years_range = []
-df_FR = pd.read_csv(r"df_FR.csv", sep=";", low_memory=False)
+df_FR = pd.read_csv(r"C:\Users\rapha\Desktop\WCS\Projet 2\Data\df_FR.csv", sep=";", low_memory=False)
 st.markdown("<style>" + open('./style/style.css').read() + '</style>', unsafe_allow_html=True)
-st.markdown("<h1 style='text-align: center;'> FilmFinder! 🎬 </h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: black;'> FilmFinder! 🎬 </h1>", unsafe_allow_html=True)
 
 with st.sidebar:
     tabs = on_hover_tabs(tabName=['Accueil','Recherche par rapport à un film', 'Recherche par genre et dates', 'Rechercher par rapport à un(e) acteur/actrice'],
@@ -42,12 +51,12 @@ with st.sidebar:
 if 'tab_selection' not in st.session_state:
     st.session_state.tab_selection = 'Accueil'    
 if tabs == 'Accueil':
-    st.markdown("<h2 style='text-align: center;'>Système de recommandation de films</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: black;'>Système de recommandation de films</h2>", unsafe_allow_html=True)
 
 if tabs == 'Recherche par rapport à un film':
     st.session_state.tab_selection = 'Recherche par rapport à un film'
     #Titre onglet
-    st.markdown("<h2 style='text-align: center;'>Entrez un film qui vous a plu📹 </h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: black;'>Entrez un film qui vous a plu📹 </h2>", unsafe_allow_html=True)
     # faire une copie de df_main
     df_copy2 = df_FR.copy()
 
@@ -95,11 +104,11 @@ if tabs == 'Recherche par rapport à un film':
             closest_fil = neighbors_gen[1][0]
             closest_films = df_search['title'].iloc[closest_fil][5:10]
 
-            st.write("Films recommandés :")
+            st.write('<p style="color:black;">Films recommandés</p>',unsafe_allow_html=True)
             for film in closest_films:
-                st.write("- " + film)
+                st.write(f'<p style="color:black;">- {film}</p>',unsafe_allow_html=True)
     else:
-            st.write("Entrez un nom de film pour commencer.")
+            st.write('<p style="color:black;">Entrez un film pour commencer</p>',unsafe_allow_html=True)
         
  #Code pour la partie "Recherche par genre et dates"
 
@@ -108,12 +117,12 @@ if tabs == 'Recherche par genre et dates':
         st.session_state.selected_genres = []
     st.session_state.tab_selection = 'Recherche par genre et dates' 
     #Titre onglet
-    st.markdown("<h2 style='text-align: center;'>Selectionnez un ou des genre(s) de films ! 📹 </h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center;color:black;'>Selectionnez un ou des genre(s) de films ! 📹 </h2>", unsafe_allow_html=True)
     # Création d'une liste de tous les genres disponibles dans la base de données
     genres_list = list(set([genre for genres in df_FR['genres'].str.split(',') for genre in genres]))
 
     # Multiselect pour choisir les genres
-    st.write("<span style='font-size:24px;font-weight:bold;'>Sélectionnez les genres que vous souhaitez voir</span>", unsafe_allow_html=True)
+    st.write("<span style='font-size:24px;font-weight:bold;color:black;'>Sélectionnez les genres que vous souhaitez voir</span>", unsafe_allow_html=True)
 
     selected_genres = st.multiselect("", genres_list)
     st.session_state.selected_genres = selected_genres
@@ -126,7 +135,7 @@ if tabs == 'Recherche par genre et dates':
              
     if "Dates":
     #Titre onglet
-        st.markdown("<h2 style='text-align: center;'>Selectionnez une plage d'année 📆 </h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='text-align: center;color:black;'>Selectionnez une plage d'année 📆 </h2>", unsafe_allow_html=True)
 
         # Curseur pour choisir la plage de dates
         years_range = st.slider('Sélectionnez la plage de dates', 1946, 2023, (1970, 2023))
@@ -156,10 +165,10 @@ if tabs == 'Recherche par genre et dates':
             film_names = list(unique_films)
 
             # Affichage des noms de films
-            st.write('Voici la liste des 5 meilleurs films :')
+            st.write('<p style="color:black;">Voici la liste des 5 meilleurs films</p>',unsafe_allow_html=True)
             for i, name in enumerate(film_names):
-                st.write(f"{i+1}. {name}")
-                print(film_names)
+                st.write(f'<p style="color:black;">- {name}</p>',unsafe_allow_html=True)
+                
         
    
  
@@ -173,10 +182,11 @@ if tabs == 'Rechercher par rapport à un(e) acteur/actrice':
 
     st.session_state.tab_selection = 'Rechercher par rapport à un(e) acteur/actrice'
     #Titre onglet
-    st.markdown("<h2 style='text-align: center;'>Entrez le nom d'un acteur ou actrice </h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center;color:black;'>Entrez le nom d'un acteur ou actrice </h2>", unsafe_allow_html=True)
     # faire une copie de df_main
     df_copy3 = df_FR.copy()
     df_copy3['actor/actress'] = df_copy3['actor/actress'].fillna("")
+    
 
     actor_actress = st.text_input("Nom d'un acteur ou actrice : ")
     if actor_actress:
@@ -191,8 +201,8 @@ if tabs == 'Rechercher par rapport à un(e) acteur/actrice':
 
     if st.button("Rechercher des films"):
         # Afficher les cinq meilleurs films
-        st.write(f"Les cinq meilleurs films avec {actor_actress} :")
+        st.write(f'<p style="color:black;">Les cinqs meilleurs film avec {actor_actress}</p>',unsafe_allow_html=True)
         for i, title in enumerate(actor_top_films):
-            st.write(f"{i+1}. {title}")
+            st.write(f'<p style="color:black;">- {title}</p>',unsafe_allow_html=True)
     else:
-        st.write("Entrez un nom d'acteur/actrice pour commencer.")
+        st.write('<p style="color:black;">Entrez un nom d acteur/actice pour commencer</p>',unsafe_allow_html=True)
