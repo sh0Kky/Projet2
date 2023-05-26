@@ -40,7 +40,7 @@ st.markdown(
 st.markdown(page_bg_img, unsafe_allow_html=True)
 selected_genres = []
 years_range = []
-df_FR = pd.read_csv(r"C:\Users\rapha\Desktop\WCS\Projet 2\Data\df_FR.csv", sep=";", low_memory=False)
+df_FR = pd.read_csv(r"df_FR.csv", sep=";", low_memory=False)
 st.markdown("<style>" + open('./style/style.css').read() + '</style>', unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center; color: black;'> FilmFinder! 🎬 </h1>", unsafe_allow_html=True)
 
